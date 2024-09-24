@@ -1,0 +1,39 @@
+﻿<Window
+    x:Class="BaldaApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:UserControls="clr-namespace:BaldaApp.UserControls"
+    xmlns:ViewModels="clr-namespace:BaldaApp.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:BaldaApp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="700"
+    Height="600"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type ViewModels:GameboardViewModel}">
+            <UserControls:Gameboard />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:AlphabetViewModel}">
+            <UserControls:Alphabet />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:WordDescriptionViewModel}">
+            <UserControls:WordDescription />
+        </DataTemplate>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <ViewModels:MainWindowViewModel />
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <ContentControl Content="{Binding Content}" />
+</Window>
