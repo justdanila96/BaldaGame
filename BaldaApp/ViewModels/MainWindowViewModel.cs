@@ -12,7 +12,7 @@ namespace BaldaApp.ViewModels {
 
             await Database.Refresh();
 
-            const int gameboardSize = 9;
+            const int gameboardSize = 7;
 
             WordItem? startWord =
                 await Database.GetRandomWordItemAsync(gameboardSize)

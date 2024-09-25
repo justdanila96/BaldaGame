@@ -11,6 +11,8 @@ namespace BaldaApp.ViewModels {
 
         [ObservableProperty]
         private Player mainPlayer;
+        [ObservableProperty]
+        private BotPlayer bot;
 
         public event Action? AlphabetRequested;
         public event Action<string?>? WordMeaningRequested;
@@ -24,6 +26,7 @@ namespace BaldaApp.ViewModels {
             fastSearch = prefixTrie;
             MainPlayer = new Player();
             selectedCells = new Stack<Cell>();
+            Bot = new BotPlayer(prefixTrie, cellMap);
             cellMap.RefreshFillableCells();
         }
 
@@ -52,6 +55,7 @@ namespace BaldaApp.ViewModels {
                 fillableCell.Letter = symbol;
                 fillableCell.Status = CellStatus.Filled;
                 cellMap.RefreshFillableCells();
+                Bot.Run(MainPlayer.FoundWords);
             }
 
             ClearSelectedCells();
